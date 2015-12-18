@@ -1,7 +1,7 @@
 package leetcode;
 
 /**************
-No. 316: Remove Duplicate Letters
+No. 316 - Remove Duplicate Letters
 Given a string which contains only lowercase letters, 
 remove duplicate letters so that every letter appear once and only once. 
 You must make sure your result is the smallest in lexicographical order among all possible results.
@@ -13,6 +13,7 @@ Given "cbacdcbc", Return "acdb"
 Approach:
 Use a stack to maintain the result order.
 **************/
+
 public class RemoveDupLetters {
     public String removeDuplicateLetters(String s) {
         // Corner Cases:
@@ -20,11 +21,13 @@ public class RemoveDupLetters {
     	// In General:
     	char[] cs = s.toCharArray();
     	
-    	// First pass:
+    	// First pass: calculate frequency.
     	int[] freq = new int[26];
     	for (int i = 0; i < cs.length; freq[cs[i++] - 'a'] += 1);
     	
-    	// Second pass:
+    	// Second pass: iterate string again and --freq[c]
+    	//   1. if already added in the stack, skip.
+    	//   2. if top > c and freq[c] still > 0, pop.
     	int[] added = new int[26];
     	char[] ret = new char[cs.length];
     	int ri = -1;
